@@ -28,9 +28,11 @@
 		<td><a href="{{path('product_edit',{'id':product.getId})}}">{{product.getName}}</a></td>
 						<td>{{ product.getPrice }}</td>
 						<td>{{ product.getDescription }}</td>
+                        {% if is_granted('ROLE_ADMIN') %}
 						<td>
                         <a href="{{ path('product_remove', {'id': product.getId}) }}" class="btn 								btn-xs btn-danger" onclick="message()">Delete</a>
                         </td>
+                        {% endif %}
 					</tr>
                 	{% endfor %}
 				</table>

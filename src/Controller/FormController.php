@@ -7,7 +7,11 @@ use App\Form\ProductType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+* @IsGranted("ROLE_USER")
+*/
 
 class FormController extends AbstractController
 {

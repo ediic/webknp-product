@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Psr\Log\LoggerInterface;
 
 class ProductController extends AbstractController
 {
@@ -21,7 +23,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/product", name="product")
      */
-    public function index(Request $request)
+    public function index()
     {
 //       $entityManager = $this->getDoctrine()->getManager();
 //       
@@ -35,16 +37,18 @@ class ProductController extends AbstractController
 //
 //       // actually executes the queries (i.e. the INSERT query)
 //       $entityManager->flush();
-		$answer = $request->query->get('t');
+		 //$answer = $request->query->get('t');
 			
-	    return new Response('Saved new product with id '.$answer);
+	    return new Response('Product page ');
     }
     
     /**
  	* @Route("/product/show", name="product_show")
  	*/
-	public function show()
+	public function show(LoggerInterface $logger)
 	{
+	    $logger->debug('Checking account page for '.$this->getUser()->getEmail());
+	   
 	    $repository = $this->getDoctrine()->getRepository(Product::class);
 	    
 	    // look for a single Product by its primary key (usually "id")
@@ -58,7 +62,7 @@ class ProductController extends AbstractController
 	    if (!$products) {
 	        throw $this->createNotFoundException('No product found!');
 	    	}
-
+	  
        return $this->render('index/index.html.twig', [
             'controller_name' => 'product_show',
             'products' => $products,
@@ -92,6 +96,7 @@ class ProductController extends AbstractController
 	
 	/**
 	 * @Route("/product/remove/{id}", name="product_remove")
+	 * @IsGranted("ROLE_ADMIN")
 	 */
 	public function remove($id)
 	{

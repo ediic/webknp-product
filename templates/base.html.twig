@@ -7,6 +7,7 @@
         {% block stylesheets %}
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 			<link href="{{ asset('css/main.css') }}" rel="stylesheet" />	 
+			<link href="{{ asset('css/login.css') }}" rel="stylesheet" />	 
         {% endblock %}
     </head>
     <body>
@@ -22,13 +23,14 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="{{ path('product') }}">Home</a></li>
+	        <li class="active"><a href="{{ path('product_show') }}">Home</a></li>
 	        <li><a href="#">About</a></li>
 	        <li><a href="#">Projects</a></li>
 	        <li><a href="#">Contact</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li><a href="{{ path('app_login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li><a href="{{ path('app_logout') }}">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
 	      </ul>
 	    </div>
 	  </div>
